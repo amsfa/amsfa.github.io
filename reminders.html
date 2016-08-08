@@ -37,7 +37,7 @@
 
 <!--    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -76,15 +76,24 @@
 
         <p>
             <center>
-                <form NAME="myform" action="" method="GET">Enter something in the box: <br>
-                   <input type="text" name="inputbox" value=""><p>
-                   <input type="button" name="button" value="Click" onClick="testResults(this.form)">
+                <form name="dateform" action="" method="get">Enter Date (dd/mm/yyyy): <br>
+                   <input id="dateform" type="text" name="inputbox" value=""><p>
+                   <input type="button" name="button" value="Submit" onClick="testResults(this.form, 'datetext')">
                 </form>
+
+                <br><br>
+
+                <form name="timeform" action="" method="get">Enter Time(military): <br>
+                   <input id="timeform" type="text" name="inputbox" value=""><p>
+                   <input type="button" name="button" value="Submit" onClick="testResults(this.form, 'timetext')">
+                </form>
+
             </center>
         </p>
 
         <br /><br /><br />
-        <center><p id="test">Test</p></center>
+        <center><p hidden id="datetext"></p></center>
+        <center><p hidden id="timetext"></p></center>
 
     </div>
 
@@ -97,11 +106,45 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script>
-        function testResults (form) 
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var hour = today.getHours();
+        var minutes = today.getMinutes();
+
+        if(dd<10) {
+            dd='0'+dd
+        }
+
+        if(mm<10) {
+            mm='0'+mm
+        }
+
+        if (hour < 10)
         {
-            var TestVar = form.inputbox.value;
-            document.getElementById("test").innerHTML = String(TestVar);
-        }   
+          hour = '0'+hour
+        }
+        if (minutes < 10)
+        {
+          minutes = '0'+ minutes
+        }
+
+        today = mm+'/'+dd+'/'+yyyy;
+        document.getElementById("dateform").value = String(today);
+        document.getElementById("timeform").value = String(hour + ":" + minutes);
+
+        document.getElementById("datetext").innerHTML = String(today);
+        document.getElementById("timetext").innerHTML = String(hour + ":" + minutes);
+
+        function testResults (form, id)
+        {
+            var inputValue = form.inputbox.value;
+            document.getElementById(String(id)).innerHTML = String(inputValue);
+        }
+
+
     </script>
 
 </body>
