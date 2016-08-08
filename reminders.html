@@ -78,14 +78,19 @@
             <center>
                 <form name="dateform" action="" method="get">Enter Date (dd/mm/yyyy): <br>
                    <input id="dateform" type="text" name="inputbox" value=""><p>
-                   <input type="button" name="button" value="Submit" onClick="testResults(this.form, 'datetext')">
                 </form>
 
                 <br><br>
 
                 <form name="timeform" action="" method="get">Enter Time(military): <br>
                    <input id="timeform" type="text" name="inputbox" value=""><p>
-                   <input type="button" name="button" value="Submit" onClick="testResults(this.form, 'timetext')">
+                </form>
+
+                <br><br>
+
+                <form name="messageform" action="" method="get">Enter reminder: <br>
+                   <input id="messageform" type="text" name="inputbox" value=""><p> <br>
+                   <input type="button" class="btn btn-default" name="button" value="Submit" onClick="testResults()">
                 </form>
 
             </center>
@@ -94,7 +99,7 @@
         <br /><br /><br />
         <center><p hidden id="datetext"></p></center>
         <center><p hidden id="timetext"></p></center>
-
+        <center><p hidden id="messagetext"></p></center>
     </div>
 
     <!-- /.container -->
@@ -138,10 +143,16 @@
         document.getElementById("datetext").innerHTML = String(today);
         document.getElementById("timetext").innerHTML = String(hour + ":" + minutes);
 
-        function testResults (form, id)
+        function testResults ()
         {
-            var inputValue = form.inputbox.value;
-            document.getElementById(String(id)).innerHTML = String(inputValue);
+            var dateInput = document.forms[0].inputbox.value;
+            var timeInput = document.forms[1].inputbox.value;
+            var messageInput = document.forms[2].inputbox.value;
+
+            document.getElementById("datetext").innerHTML = String(dateInput);
+            document.getElementById("timetext").innerHTML = String(timeInput);
+            document.getElementById("messagetext").innerHTML = String(messageInput);
+
         }
 
 
