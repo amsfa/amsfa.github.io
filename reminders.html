@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Ashwin Kudva">
 
-    <title>AMSFA Control Panel</title>
+    <title>AMSFA Reminders</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -70,17 +70,22 @@
     <!-- Page Content -->
     <div class="container">
         <div class="jumbotron">
-            <h1><center>AMSFA Control Panel</center></h1>
-            <p><center>Set Reminders, Check Stocks, and More!</center></p>
+            <h1><center>AMSFA Reminders</center></h1>
+            <p><center>Set a Reminder!</center></p>
         </div>
+
         <p>
             <center>
-                <br /><br />   
-                <a href="reminders.html" class="btn btn-default">Set a Reminder</a>
-                <br /><br />
-                <a href="stocks.html" class="btn btn-default">Check Stocks</a>
+                <form NAME="myform" action="" method="GET">Enter something in the box: <br>
+                   <input type="text" name="inputbox" value=""><p>
+                   <input type="button" name="button" value="Click" onClick="testResults(this.form)">
+                </form>
             </center>
         </p>
+
+        <br /><br /><br />
+        <center><p id="test">Test</p></center>
+
     </div>
 
     <!-- /.container -->
@@ -90,6 +95,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        function testResults (form) 
+        {
+            var TestVar = form.inputbox.value;
+            document.getElementById("test").innerHTML = String(TestVar);
+        }   
+    </script>
 
 </body>
 
