@@ -98,7 +98,13 @@
     <!-- FORM CODE -->
     <script>
 
-      <!--database.ref('root').set({username:'DEE'});-->
+        $('html').bind('keypress', function(e)
+        {
+           if(e.keyCode == 13)
+           {
+              return false;
+           }
+        });
 
         <!--AUTOFILL FORMS-->
         var today = new Date();
@@ -135,12 +141,14 @@
             var timeInput = document.forms[1].inputbox.value;
             var messageInput = document.forms[2].inputbox.value;
 
-            database.ref('command').set(
+            database.ref('reminder').set(
             {
                 Date:String(dateInput),
                 Time:String(timeInput),
                 Message:String(messageInput)
             });
+
+            alert("Submitted reminder");
 
         }
 
