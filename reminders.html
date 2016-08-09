@@ -56,7 +56,7 @@
 
                 <form name="messageform" action="" method="get">Enter reminder: <br>
                    <input id="messageform" type="text" name="inputbox" value=""><p> <br>
-                   <input type="button" class="btn btn-default" name="button" value="Submit" onClick="testResults()">
+                   <input type="button" class="btn btn-default" name="button" value="Submit" onClick="submitButton()">
                 </form>
 
                 <br><br><br>
@@ -129,18 +129,19 @@
         document.getElementById("dateform").value = String(today);
         document.getElementById("timeform").value = String(hour + ":" + minutes);
 
-        function testResults ()
+        function submitButton ()
         {
             var dateInput = document.forms[0].inputbox.value;
             var timeInput = document.forms[1].inputbox.value;
             var messageInput = document.forms[2].inputbox.value;
 
             database.ref('command').set(
-              {
-                  Date:String(dateInput),
-                  Time:String(timeInput),
-                  Message:String(messageInput)
-              });
+            {
+                Date:String(dateInput),
+                Time:String(timeInput),
+                Message:String(messageInput)
+            });
+
         }
 
 
