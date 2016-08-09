@@ -33,40 +33,6 @@
 
 <body>
 
-    <!-- Navigation -->
-
-<!--    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-    </nav> -->
-
-
     <!-- Page Content -->
     <div class="container">
         <div class="jumbotron">
@@ -93,16 +59,34 @@
                    <input type="button" class="btn btn-default" name="button" value="Submit" onClick="testResults()">
                 </form>
 
+                <br><br><br>
+                <a href="index.html" class="btn btn-default">Homepage</a>
+
             </center>
         </p>
 
-        <br /><br /><br />
-        <center><p hidden id="datetext"></p></center>
-        <center><p hidden id="timetext"></p></center>
-        <center><p hidden id="messagetext"></p></center>
     </div>
 
     <!-- /.container -->
+
+
+    <!-- FIREBASE CODE -->
+    <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDDt0DI9Bdim8qSuA7Cl9s0_z6v3nHDX3Q",
+        authDomain: "amsfa-b7007.firebaseapp.com",
+        databaseURL: "https://amsfa-b7007.firebaseio.com",
+        storageBucket: "",
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+
+    <!-- BOOTSTRAP INIT -->
+    </script>
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
@@ -110,8 +94,13 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+
+    <!-- FORM CODE -->
     <script>
 
+      <!--database.ref('root').set({username:'DEE'});-->
+
+        <!--AUTOFILL FORMS-->
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
@@ -140,19 +129,18 @@
         document.getElementById("dateform").value = String(today);
         document.getElementById("timeform").value = String(hour + ":" + minutes);
 
-        document.getElementById("datetext").innerHTML = String(today);
-        document.getElementById("timetext").innerHTML = String(hour + ":" + minutes);
-
         function testResults ()
         {
             var dateInput = document.forms[0].inputbox.value;
             var timeInput = document.forms[1].inputbox.value;
             var messageInput = document.forms[2].inputbox.value;
 
-            document.getElementById("datetext").innerHTML = String(dateInput);
-            document.getElementById("timetext").innerHTML = String(timeInput);
-            document.getElementById("messagetext").innerHTML = String(messageInput);
-
+            database.ref('command').set(
+              {
+                  Date:String(dateInput),
+                  Time:String(timeInput),
+                  Message:String(messageInput)
+              });
         }
 
 
